@@ -10,15 +10,16 @@ public class GameCanvas extends JPanel {
         setUpBackBuffered();
         GameObjectManager.instance.add(new CreateCould());
         GameObjectManager.instance.add(new Background());
-        GameObjectManager.instance.add(new CloudSteady(200,600));
+        GameObjectManager.instance.add(new CloudSteady(100,600));
         GameObjectManager.instance.add(new CloudSteady(300,600));
+        GameObjectManager.instance.add(new CloudSteady(300,400));
         this.setupPlayer();
         this.setVisible(true);
     }
 
     public void setupPlayer(){
         Player player = new Player();
-        player.position.set(new Vector2D(200,450));
+        player.position.set(new Vector2D(100,450));
         GameObjectManager.instance.add(player);
     }
 
