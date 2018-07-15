@@ -33,6 +33,7 @@ public class PlayerMove implements GameObjectAttributes<Player> {
         CloudSteady cloudSteady = GameObjectManager.instance.checkCollision(player);
         if(cloudSteady != null ){
             this.velocityY = 6;
+            this.velocityX = 0;
         }
         if(this.velocityY > - terminal_velocity ){
             this.velocityY -= gravity;
