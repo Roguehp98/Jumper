@@ -4,7 +4,7 @@ public class PlayerMove implements GameObjectAttributes<Player> {
     float velocityX = 0;
     float velocityY = 2;
     float terminal_velocity = 2;
-    float gravity = 0.15f;
+    float gravity = 0.2f;
     public PlayerMove() {
 
     }
@@ -23,11 +23,11 @@ public class PlayerMove implements GameObjectAttributes<Player> {
 
         if (KeybroadInput.instance.isLeft) {
 
-                velocityX = 1;
+                velocityX = 2;/* */
         }
         if (KeybroadInput.instance.isRight) {
 //            if(velocityX < 2)
-                velocityX = -1;
+                velocityX = -2;/* */
         }
 
     }
@@ -35,7 +35,7 @@ public class PlayerMove implements GameObjectAttributes<Player> {
     public void AxisY(Player player){
         CloudSteady cloudSteady = GameObjectManager.instance.checkCollision(player);
         if(cloudSteady != null ){
-            this.velocityY = 6;
+            this.velocityY = 7;/* */
             this.velocityX = 0;
         }
 //        if(this.velocityY > - terminal_velocity ){
