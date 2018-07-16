@@ -11,8 +11,8 @@ public class GameCanvas extends JPanel {
         GameObjectManager.instance.add(new CreateCould());
         GameObjectManager.instance.add(new Background());
         GameObjectManager.instance.add(new CloudSteady(100,600));
-        GameObjectManager.instance.add(new CloudSteady(300,600));
-        GameObjectManager.instance.add(new CloudSteady(300,400));
+        GameObjectManager.instance.add(new CloudSteady(200,600));
+        GameObjectManager.instance.add(new CloudSteady(200,500));
         this.setupPlayer();
         this.setVisible(true);
     }
