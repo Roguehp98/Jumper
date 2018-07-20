@@ -2,7 +2,9 @@ import Base.GameObjectManager;
 import Base.Vector2D;
 import Game.Background.Background;
 import Game.Cloud.CloudSteady;
-import Game.Cloud.CreateCould;
+import Game.Cloud.CreateCouldJump;
+import Game.Cloud.CreateDriftingCloud;
+import Game.Cloud.DriftingCloud;
 import Game.Player.Player;
 
 import javax.swing.*;
@@ -15,9 +17,10 @@ public class GameCanvas extends JPanel {
     public GameCanvas(){
         this.setSize(600,800);
         setUpBackBuffered();
-        GameObjectManager.instance.add(new CreateCould());
+        GameObjectManager.instance.add(new CreateCouldJump());
         GameObjectManager.instance.add(new Background());
         GameObjectManager.instance.add(new CloudSteady());
+        GameObjectManager.instance.add(new CreateDriftingCloud());
         this.setupPlayer();
         this.setVisible(true);
     }

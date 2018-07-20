@@ -50,7 +50,7 @@ public class PlayerMove implements GameObjectAttributes<Player> {
 
     public void AxisY(Player player){
         CloudSteady cloudSteady = GameObjectManager.instance.checkCollision(player);
-//        Game.Cloud.Cloud cloud = Base.GameObjectManager.instance.checkCollision1(player);
+//        Game.CloudJump.CloudJump cloud = Base.GameObjectManager.instance.checkCollision1(player);
         if(this.velocityY <= 0){
             if(cloudSteady != null ){
                 this.velocityY = 7;/* */

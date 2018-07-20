@@ -21,12 +21,10 @@ public class CloudSteady extends GameObject {
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resource/cloud.png",50,20);
         this.loadLocationCloudSteady = new Vector2D();
-
-
     }
 
     public void run(){
-        this.position.set(100,600);
+        this.position.set(300,600);
         loadLocationCloudSteady.set(this.position.copy());
         Player player = GameObjectManager.instance.findPlayer();
         if(player.velocity.y > 0 ){

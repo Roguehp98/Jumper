@@ -1,6 +1,6 @@
 package Base;
 
-import Game.Cloud.Cloud;
+import Game.Cloud.CloudJump;
 import Game.Cloud.CloudSteady;
 import Game.Player.Player;
 import Physic.BoxCollider;
@@ -44,17 +44,17 @@ public class GameObjectManager {
     public int countCloud(){
         this.list
                 .stream()
-                .filter(gameObject -> gameObject instanceof Cloud)
+                .filter(gameObject -> gameObject instanceof CloudJump)
                 .forEach(gameObject -> this.countCloud++);
         return this.countCloud;
     }
 
-    public Cloud checkCollision1(Player player){
-        return (Cloud) this.list
+    public CloudJump checkCollision1(Player player){
+        return (CloudJump) this.list
                                 .stream()
-                                .filter(gameObject -> gameObject instanceof Cloud)
+                                .filter(gameObject -> gameObject instanceof CloudJump)
                                 .filter(gameObject -> {
-                                    BoxCollider other = ((Cloud) gameObject).boxCollider;
+                                    BoxCollider other = ((CloudJump) gameObject).boxCollider;
                                     return player.boxCollider.checkCollision(other);
                                 })
                                 .findFirst()
