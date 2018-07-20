@@ -1,3 +1,10 @@
+package Game.Cloud;
+
+import Base.GameObject;
+import Base.Vector2D;
+import Physic.BoxCollider;
+import Renderer.ImageRenderer;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -9,9 +16,9 @@ public class Cloud extends GameObject {
     Random random = new Random();
     public Cloud(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/cloud.png",30,20);
-        this.position.set(random.nextInt(400),800);
-        this.boxCollider = new BoxCollider(30,20);
+        this.renderer = new ImageRenderer("resource/cloud.png",50,20);
+//        this.position.set(random.nextInt(400),800);
+        this.boxCollider = new BoxCollider(50,20);
 
     }
 

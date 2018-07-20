@@ -1,3 +1,10 @@
+import Base.GameObjectManager;
+import Base.Vector2D;
+import Game.Background.Background;
+import Game.Cloud.CloudSteady;
+import Game.Cloud.CreateCould;
+import Game.Player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,13 +13,11 @@ public class GameCanvas extends JPanel {
     Graphics graphics;
     BufferedImage backBuffered;
     public GameCanvas(){
-        this.setSize(400,800);
+        this.setSize(600,800);
         setUpBackBuffered();
         GameObjectManager.instance.add(new CreateCould());
         GameObjectManager.instance.add(new Background());
-        GameObjectManager.instance.add(new CloudSteady(100,600));
-        GameObjectManager.instance.add(new CloudSteady(200,600));
-        GameObjectManager.instance.add(new CloudSteady(200,500));
+        GameObjectManager.instance.add(new CloudSteady());
         this.setupPlayer();
         this.setVisible(true);
     }
@@ -22,6 +27,8 @@ public class GameCanvas extends JPanel {
         player.position.set(new Vector2D(100,450));
         GameObjectManager.instance.add(player);
     }
+
+
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -37,7 +44,7 @@ public class GameCanvas extends JPanel {
         GameObjectManager.instance.runAll();
     }
     public void setUpBackBuffered(){
-        backBuffered = new BufferedImage(400,800,BufferedImage.TYPE_4BYTE_ABGR);
+        backBuffered = new BufferedImage(600,800,BufferedImage.TYPE_4BYTE_ABGR);
         this.graphics = this.backBuffered.getGraphics();
     }
 

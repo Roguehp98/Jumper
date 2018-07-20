@@ -1,3 +1,7 @@
+package Physic;
+
+import Base.Vector2D;
+
 import java.awt.*;
 
 public class BoxCollider {

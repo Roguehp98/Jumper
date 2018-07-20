@@ -1,3 +1,8 @@
+package Renderer;
+
+import Base.Vector2D;
+import Renderer.Renderer;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;

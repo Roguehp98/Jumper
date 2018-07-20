@@ -1,3 +1,9 @@
+package Game.Background;
+
+import Base.GameObject;
+import Renderer.BackgroundRenderer;
+
+
 import java.awt.*;
 
 public class Background extends GameObject {
@@ -6,7 +12,7 @@ public class Background extends GameObject {
         this.renderer = new BackgroundRenderer(
                 0,
                 0,
-                400,
+                600,
                 800,
                 Color.CYAN
         );

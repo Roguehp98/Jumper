@@ -1,3 +1,5 @@
+import Input.KeybroadInput;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -7,7 +9,7 @@ public class GameWindow extends JFrame {
     long lastTime;
 
     public GameWindow() {
-        this.setSize(400, 800);
+        this.setSize(600, 800);
         gameCanvas = new GameCanvas();
         this.add(gameCanvas);
         this.event();
