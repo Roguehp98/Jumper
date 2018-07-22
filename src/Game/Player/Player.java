@@ -2,26 +2,49 @@ package Game.Player;
 
 import Base.GameObject;
 import Base.Vector2D;
+import Game.Cloud.CloudJump;
+import Game.Cloud.CloudSteady;
 import Physic.BoxCollider;
+import Physic.PhysicBody;
+import Physic.RunHitObj;
 import Renderer.ImageRenderer;
 
 
-public class Player extends GameObject {
+public class Player extends GameObject implements PhysicBody {
 
     public Vector2D velocity;
 
     public BoxCollider boxCollider;
+    public static boolean changeVelocity = false;
+
+    private RunHitObj runHitObj;
 
     public Player(){
-        this.renderer = new ImageRenderer("resource/circle.png",10,10);
+        this.renderer = new ImageRenderer("resource/circle.png",15,15);
         this.velocity = new Vector2D();
-        this.boxCollider = new BoxCollider(20,20);
+        this.boxCollider = new BoxCollider(15,15);
         this.attributes.add(new PlayerMove());
+        this.runHitObj = new RunHitObj(
+                CloudJump.class,
+                CloudSteady.class
+        );
     }
 
     @Override
     public void run() {
         super.run();
-        this.boxCollider.position.set(this.position.x - 10, this.position.y - 10);
+        this.boxCollider.position.set(this.position.x - 7, this.position.y - 7);
+        runHitObj.run(this);
     }
+
+    @Override
+    public BoxCollider getBoxCollier() {
+        return this.boxCollider;
+    }
+
+    @Override
+    public void getHit(GameObject gameObject) {
+            this.changeVelocity = true;
+    }
+
 }

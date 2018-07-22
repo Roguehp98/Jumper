@@ -12,7 +12,7 @@ public class Background extends GameObject {
         this.renderer = new BackgroundRenderer(
                 0,
                 0,
-                600,
+                450,
                 800,
                 Color.CYAN
         );

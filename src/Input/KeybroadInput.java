@@ -8,12 +8,14 @@ public class KeybroadInput implements KeyListener {
 
     public boolean isRight = false;
     public boolean isLeft = false;
+    public boolean isSpace = false;
     public int countTime = 5;
 
-    private KeybroadInput(){
+    private KeybroadInput() {
 
     }
-    public void reset(){
+
+    public void reset() {
         this.countTime = 1;
     }
 
@@ -26,20 +28,26 @@ public class KeybroadInput implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                this.isRight = true;
-            }
+            this.isRight = true;
+        }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             this.isLeft = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_X) {
+            this.isSpace = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                this.isRight = false;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                this.isLeft = false;
-            }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            this.isRight = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            this.isLeft = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_X) {
+            this.isSpace = false;
+        }
     }
 }

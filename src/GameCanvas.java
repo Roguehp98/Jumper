@@ -5,6 +5,7 @@ import Game.Cloud.CloudSteady;
 import Game.Cloud.CreateCouldJump;
 import Game.Cloud.CreateDriftingCloud;
 import Game.Cloud.DriftingCloud;
+import Game.Enemy;
 import Game.Player.Player;
 
 import javax.swing.*;
@@ -17,17 +18,20 @@ public class GameCanvas extends JPanel {
     public GameCanvas(){
         this.setSize(600,800);
         setUpBackBuffered();
-        GameObjectManager.instance.add(new CreateCouldJump());
+        CreateCouldJump createCouldJump = GameObjectManager.instance.recycle(CreateCouldJump.class);
+        createCouldJump.configAction();
         GameObjectManager.instance.add(new Background());
-        GameObjectManager.instance.add(new CloudSteady());
-        GameObjectManager.instance.add(new CreateDriftingCloud());
+        GameObjectManager.instance.add(new CloudSteady(300,600));
+//        GameObjectManager.instance.add(new CloudSteady(300,400));
+        GameObjectManager.instance.add(new Enemy());
+//        GameObjectManager.instance.add(new CreateDriftingCloud());
         this.setupPlayer();
         this.setVisible(true);
     }
 
     public void setupPlayer(){
         Player player = new Player();
-        player.position.set(new Vector2D(100,450));
+        player.position.set(new Vector2D(300,450));
         GameObjectManager.instance.add(player);
     }
 
@@ -47,7 +51,7 @@ public class GameCanvas extends JPanel {
         GameObjectManager.instance.runAll();
     }
     public void setUpBackBuffered(){
-        backBuffered = new BufferedImage(600,800,BufferedImage.TYPE_4BYTE_ABGR);
+        backBuffered = new BufferedImage(450,800,BufferedImage.TYPE_4BYTE_ABGR);
         this.graphics = this.backBuffered.getGraphics();
     }
 

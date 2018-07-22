@@ -9,7 +9,7 @@ public class GameWindow extends JFrame {
     long lastTime;
 
     public GameWindow() {
-        this.setSize(600, 800);
+        this.setSize(450, 800);
         gameCanvas = new GameCanvas();
         this.add(gameCanvas);
         this.event();

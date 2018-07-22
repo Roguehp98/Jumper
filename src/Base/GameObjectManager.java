@@ -4,6 +4,7 @@ import Game.Cloud.CloudJump;
 import Game.Cloud.CloudSteady;
 import Game.Player.Player;
 import Physic.BoxCollider;
+import Physic.PhysicBody;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -24,13 +25,19 @@ public class GameObjectManager {
     }
 
     public void runAll(){
-        this.list.forEach(gameObject -> gameObject.run());
+        this.list
+                .stream()
+                .filter(gameObject -> gameObject.isAlive)
+                .forEach(gameObject -> gameObject.run());
         this.list.addAll(this.tempList);
         this.tempList.clear();
     }
 
     public void renderAll(Graphics graphics){
-        this.list.forEach(gameObject -> gameObject.render(graphics));
+        this.list
+                .stream()
+                .filter(gameObject -> gameObject.isAlive)
+                .forEach(gameObject -> gameObject.render(graphics));
     }
 
     public Player findPlayer(){
@@ -49,30 +56,43 @@ public class GameObjectManager {
         return this.countCloud;
     }
 
-    public CloudJump checkCollision1(Player player){
-        return (CloudJump) this.list
-                                .stream()
-                                .filter(gameObject -> gameObject instanceof CloudJump)
-                                .filter(gameObject -> {
-                                    BoxCollider other = ((CloudJump) gameObject).boxCollider;
-                                    return player.boxCollider.checkCollision(other);
-                                })
-                                .findFirst()
-                                .orElse(null);
-    }
 
-    public CloudSteady checkCollision(Player player){
-        return (CloudSteady) this.list
+
+    public <T extends GameObject & PhysicBody> T checkCollision(BoxCollider boxCollider, Class<T> cls){
+        return (T) this.list
                 .stream()
-                .filter(gameObject -> gameObject instanceof CloudSteady)
+                .filter(gameObject -> gameObject.isAlive )
+                .filter(gameObject -> cls.isInstance(gameObject))
                 .filter(gameObject -> {
-                    BoxCollider other = ((CloudSteady) gameObject).boxCollider;
-                    return player.boxCollider.checkCollision(other);
+                    BoxCollider other = ((T) gameObject).getBoxCollier();
+                    return boxCollider.checkCollision(other);
                 })
                 .findFirst()
                 .orElse(null);
     }
 
+    public <T extends GameObject> T recycle(Class<T> cls) {
+        T object = (T)this.list
+                .stream()
+                .filter(gameObject -> !gameObject.isAlive)
+                .filter(gameObject -> cls.isInstance(gameObject))
+                .findFirst()
+                .orElse(null);
+        if(object != null){
+            object.isAlive = true;
+        }
+        else{
+            try {
+                object = cls.newInstance(); // tao moi 1 doi tuong
+                this.add(object);
+            } catch (InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return object;
+//        cls.newInstance();
+    }
 
 
 

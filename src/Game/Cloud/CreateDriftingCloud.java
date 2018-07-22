@@ -21,8 +21,8 @@ public class CreateDriftingCloud extends GameObject {
     }
     public void run(){
         if(this.frameCounter.run()){
-            DriftingCloud driftingCloud = new DriftingCloud();
-            GameObjectManager.instance.add(driftingCloud);
+            DriftingCloud driftingCloud = GameObjectManager.instance.recycle(DriftingCloud.class);
+//            GameObjectManager.instance.add(driftingCloud);
             driftingCloud.velocity.set(new Vector2D(0,1));
             positionDriftingCloud(driftingCloud);
             this.frameCounter.reset();
@@ -36,12 +36,13 @@ public class CreateDriftingCloud extends GameObject {
         }
         if(this.zoneCloud == 0){
             a = random.nextInt(200);
-            driftingCloud.position.set(new Vector2D(300 + a,0));
+            driftingCloud.position.set(new Vector2D(400 + a,0));
         }
     }
     // Công việc ngày mai
     /* Sáng: recycle và action để cloud ra chậm hơn
         clean code phần va chạm
         Tối: Enemy chạy hình sin
+        Double jump
      */
 }
