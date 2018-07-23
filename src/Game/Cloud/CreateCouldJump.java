@@ -37,7 +37,7 @@ public class CreateCouldJump extends GameObject {
         this.addAction(
                 new RepeatActionForever(
                         new SequenceAction(
-                                new WaitAction(50),
+//                                new WaitAction(120),
                                 new ActionAdapter() {
                                     @Override
                                     public boolean run(GameObject owner) {
@@ -77,11 +77,11 @@ public class CreateCouldJump extends GameObject {
             this.loadLocationCloudBefore.set(cloudJump.position.copy());
         } else {
             randomLocaion();
-            cloudJump.position.x = this.loadLocationCloudBefore.x - location * random.nextInt(108) - location * 30;
-            if (cloudJump.position.x < 70 || cloudJump.position.x > 400) {
-                cloudJump.position.x = this.loadLocationCloudBefore.x - (-1) * location * random.nextInt(108);
+            cloudJump.position.x = this.loadLocationCloudBefore.x - location * random.nextInt(108) - location * 20;
+            if (cloudJump.position.x < 70 || cloudJump.position.x > 350) {
+                cloudJump.position.x = this.loadLocationCloudBefore.x - (-1) * location * random.nextInt(108) + location*20;
             }
-            cloudJump.position.y = this.loadLocationCloudBefore.y - 45 ;
+            cloudJump.position.y = this.loadLocationCloudBefore.y - 65 ;
             this.loadLocationCloudBefore.set(cloudJump.position.copy());
         }
     }

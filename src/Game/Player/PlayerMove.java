@@ -25,7 +25,7 @@ public class PlayerMove implements GameObjectAttributes<Player> {
     @Override
     public void run(Player player) {
         AxisX();
-        AxisY();
+        AxisY(player);
         player.velocity.set(velocityX, velocityY);
         player.position.subtractBy(player.velocity);
     }
@@ -39,21 +39,23 @@ public class PlayerMove implements GameObjectAttributes<Player> {
         }
     }
 
-    public void AxisY() {
-//        CloudSteady cloudSteady = GameObjectManager.instance.checkCollision(player.boxCollider,CloudSteady.class);
+    public void AxisY(Player player) {
+        CloudSteady cloudSteady = GameObjectManager.instance.checkCollision(player.boxCollider,CloudSteady.class);
+        CloudJump cloudJump = GameObjectManager.instance.checkCollision(player.boxCollider,CloudJump.class);
 
-        if (this.velocityY < 0) {
-            if (Player.changeVelocity) {
+
+        if (this.velocityY <= 0) {
+            if (cloudJump != null || cloudSteady != null) {
                 this.velocityY = 7;/* */
                 this.velocityX = 0;
 //                System.out.println("up");
-                Player.changeVelocity = false;
+//                Player.changeVelocity = false;
             }
-        }
-        if(this.velocityY > 0){
-            if(Player.changeVelocity){
+        }else{
+
+            if(cloudJump != null || cloudSteady != null){
                 this.velocityY = 0;
-                Player.changeVelocity = false;
+//                Player.changeVelocity = false;
             }
 
         }

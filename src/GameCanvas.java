@@ -4,8 +4,7 @@ import Game.Background.Background;
 import Game.Cloud.CloudSteady;
 import Game.Cloud.CreateCouldJump;
 import Game.Cloud.CreateDriftingCloud;
-import Game.Cloud.DriftingCloud;
-import Game.Enemy;
+import Game.Enemy.EnemySin;
 import Game.Player.Player;
 
 import javax.swing.*;
@@ -20,11 +19,12 @@ public class GameCanvas extends JPanel {
         setUpBackBuffered();
         CreateCouldJump createCouldJump = GameObjectManager.instance.recycle(CreateCouldJump.class);
         createCouldJump.configAction();
+        CreateDriftingCloud createDriftingCloud = GameObjectManager.instance.recycle(CreateDriftingCloud.class);
+        createDriftingCloud.configAction();
         GameObjectManager.instance.add(new Background());
         GameObjectManager.instance.add(new CloudSteady(300,600));
-//        GameObjectManager.instance.add(new CloudSteady(300,400));
-        GameObjectManager.instance.add(new Enemy());
-//        GameObjectManager.instance.add(new CreateDriftingCloud());
+        GameObjectManager.instance.add(new EnemySin());
+
         this.setupPlayer();
         this.setVisible(true);
     }

@@ -29,6 +29,7 @@ public class SequenceAction implements Action {
 
     @Override
     public void reset() {
+        this.currentIndex = 0;
         this.actions
                 .forEach(action -> action.reset());
     }

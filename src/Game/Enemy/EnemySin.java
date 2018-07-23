@@ -1,16 +1,16 @@
-package Game;
+package Game.Enemy;
 
 import Base.GameObject;
 import Base.Vector2D;
 import Renderer.ImageRenderer;
 
-public class Enemy extends GameObject {
+public class EnemySin extends GameObject {
     Vector2D velocity;
     int count = -5;
     int change = 0;
     double angle ;
 
-    public Enemy(){
+    public EnemySin(){
         this.velocity = new Vector2D(-1,0);
         this.renderer = new ImageRenderer("resource/star.png",30,30);
         this.position.set(0,200);
@@ -24,7 +24,7 @@ public class Enemy extends GameObject {
         }
         angle = 15 * count;
         double radians = Math.toRadians(angle);
-        this.velocity.y = (float)(Math.sin(radians));
+        this.velocity.y = 2*(float)(Math.sin(radians));
         this.position.subtractBy(this.velocity);
         reset();
 

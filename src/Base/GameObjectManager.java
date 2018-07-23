@@ -40,14 +40,15 @@ public class GameObjectManager {
                 .forEach(gameObject -> gameObject.render(graphics));
     }
 
-    public Player findPlayer(){
-        return (Player) this.list
+
+    public <T extends GameObject & PhysicBody> T findObject(Class<T> cls){
+        return (T) this.list
                 .stream()
-                .filter(gameObject -> gameObject instanceof Player)
+                .filter(gameObject -> cls.isInstance(gameObject))
+                .filter(gameObject -> gameObject.isAlive)
                 .findFirst()
                 .orElse(null);
     }
-
     public int countCloud(){
         this.list
                 .stream()

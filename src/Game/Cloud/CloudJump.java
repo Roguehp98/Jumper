@@ -18,25 +18,26 @@ public class CloudJump extends GameObject implements PhysicBody {
     public Vector2D velocity;
 
     Random random = new Random();
-    public CloudJump(){
+
+    public CloudJump() {
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/cloud.png",50,20);
-//        this.position.set(random.nextInt(400),800);
-        this.boxCollider = new BoxCollider(50,20);
+        this.renderer = new ImageRenderer("resource/cloud.png", 50, 20);
+        this.boxCollider = new BoxCollider(50, 1);
 //        this.runHitObj = new RunHitObj(Player.class);
     }
 
-    public void run(){
+    public void run() {
         super.run();
-        this.velocity.set(new Vector2D(0,1));
-        Player player = GameObjectManager.instance.findPlayer();
-        if(player.velocity.y > 0 ){
-            this.boxCollider = new BoxCollider(50,1);
-            this.boxCollider.position.set(this.position.x - 25,this.position.y + 10);
-        }else{
-            this.boxCollider = new BoxCollider(50,1);
+        this.velocity.set(new Vector2D(0, 1));
+        Player player = GameObjectManager.instance.findObject(Player.class);
+        if (player.velocity.y > 0) {
+//            this.boxCollider = new BoxCollider(50,1);
+            this.boxCollider.position.set(this.position.x - 25, this.position.y + 10);
+        } else {
+//            this.boxCollider = new BoxCollider(50,1);
             this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
         }
+//        this.boxCollider.position.set(this.position.x - 25,this.position.y  - 10);
         this.position.addUp(this.velocity);
 
     }

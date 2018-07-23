@@ -1,5 +1,6 @@
 package Game.Cloud;
 
+import Action.*;
 import Base.GameObject;
 import Base.GameObjectManager;
 import Base.Vector2D;
@@ -31,15 +32,19 @@ public class CloudSteady extends GameObject implements PhysicBody {
     public void run(){
 //        this.position.set(300,600);
         loadLocationCloudSteady.set(this.position.copy());
-        Player player = GameObjectManager.instance.findPlayer();
-        this.boxCollider.position.set(this.position.x - 25,this.position.y -10);
-//        if(player.velocity.y > 0 ){
-//            this.boxCollider = new BoxCollider(50,1);
-//            this.boxCollider.position.set(this.position.x - 25,this.position.y + 10);
-//        }else{
-//            this.boxCollider = new BoxCollider(50,1);
-//            this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
-//        }
+        Player player = GameObjectManager.instance.findObject(Player.class);
+//        this.boxCollider.position.set(this.position.x - 25,this.position.y -10);
+        if(player.velocity.y > 0 ){
+            this.boxCollider = new BoxCollider(50,1);
+            this.boxCollider.position.set(this.position.x - 25,this.position.y + 10);
+        }else{
+            this.boxCollider = new BoxCollider(50,1);
+            this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
+        }
+        if(player.position.x != 300) {
+            addAction(new WaitAction(100));
+            this.isAlive = false;
+        }
     }
 
 

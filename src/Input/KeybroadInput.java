@@ -33,7 +33,7 @@ public class KeybroadInput implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             this.isLeft = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_X) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             this.isSpace = true;
         }
     }
@@ -46,7 +46,7 @@ public class KeybroadInput implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             this.isLeft = false;
         }
-        if (e.getKeyCode() == KeyEvent.VK_X) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             this.isSpace = false;
         }
     }

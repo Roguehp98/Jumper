@@ -26,7 +26,7 @@ public class DriftingCloud extends GameObject implements PhysicBody {
     public void run(){
         super.run();
         this.position.addUp(this.velocity);
-        Player player = GameObjectManager.instance.findPlayer();
+        Player player = GameObjectManager.instance.findObject(Player.class);
         if(player.velocity.y > 0 ){
             this.boxCollider = new BoxCollider(50,1);
             this.boxCollider.position.set(this.position.x - 25,this.position.y + 10);
