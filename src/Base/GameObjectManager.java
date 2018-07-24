@@ -30,6 +30,7 @@ public class GameObjectManager {
                 .filter(gameObject -> gameObject.isAlive)
                 .forEach(gameObject -> gameObject.run());
         this.list.addAll(this.tempList);
+        System.out.println(this.list.size());
         this.tempList.clear();
     }
 
@@ -88,12 +89,13 @@ public class GameObjectManager {
                 this.add(object);
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
-                return null;
             }
         }
         return object;
 //        cls.newInstance();
     }
+
+
 
 
 

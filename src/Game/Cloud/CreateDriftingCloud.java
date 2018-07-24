@@ -32,7 +32,6 @@ public class CreateDriftingCloud extends GameObject  {
                                         driftingCloud.velocity.set(0,1);
                                         EnemyPlatform enemyPlatform = GameObjectManager.instance.recycle(EnemyPlatform.class);
                                         enemyPlatform.position.set(driftingCloud.position.x,driftingCloud.position.y - 25);
-                                        outSreen(driftingCloud);
                                         if(!driftingCloud.isAlive){
                                             enemyPlatform.isAlive = false;
                                         }
@@ -56,9 +55,5 @@ public class CreateDriftingCloud extends GameObject  {
         }
     }
 
-    public void outSreen(DriftingCloud driftingCloud){
-        if(driftingCloud.position.y > 800){
-            driftingCloud.isAlive = false;
-        }
-    }
+
 }

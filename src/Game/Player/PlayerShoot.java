@@ -9,7 +9,7 @@ public class PlayerShoot implements GameObjectAttributes<Player> {
     private FrameCounter frameCounter;
 
     public PlayerShoot() {
-        this.frameCounter = new FrameCounter(30);
+        this.frameCounter = new FrameCounter(20);
     }
 
     @Override
@@ -19,9 +19,14 @@ public class PlayerShoot implements GameObjectAttributes<Player> {
                 if (KeybroadInput.instance.isSpace && player.velocity.x != 0) {
                     PlayerBullet playerBullet = GameObjectManager.instance.recycle(PlayerBullet.class);
                     playerBullet.position.set(player.position);
-                    playerBullet.velocity.set(new Vector2D(-player.velocity.x, 0).multiply(1.5f));
+                    playerBullet.velocity.set(new Vector2D(-player.velocity.x, 0).multiply(2f));
+                    outScreen(playerBullet);
                     this.frameCounter.reset();
                 }
         }
+    }
+    public void outScreen(PlayerBullet playerBullet){
+        if(playerBullet.position.x < 0|| playerBullet.position.x > 480)
+            playerBullet.isAlive = false;
     }
 }

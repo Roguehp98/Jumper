@@ -25,19 +25,10 @@ public class CreateCouldJump extends GameObject {
     }
 
     public void configAction() {
-//        if(this.frameCounter.run()){
-//            CloudJump cloudJump = GameObjectManager.instance.recycle(CloudJump.class);
-////            GameObjectManager.instance.add(cloudJump);
-//            cloudJump.velocity.set(new Vector2D(0,1));
-//            countCloud = GameObjectManager.instance.countCloud();
-//            positionCloudJump(cloudJump);
-//            this.frameCounter.reset();
-//        }
 
         this.addAction(
                 new RepeatActionForever(
                         new SequenceAction(
-//                                new WaitAction(120),
                                 new ActionAdapter() {
                                     @Override
                                     public boolean run(GameObject owner) {
@@ -85,5 +76,7 @@ public class CreateCouldJump extends GameObject {
             this.loadLocationCloudBefore.set(cloudJump.position.copy());
         }
     }
+
+
 
 }

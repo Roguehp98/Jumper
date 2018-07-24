@@ -2,8 +2,7 @@ package Game.Player;
 
 import Base.GameObject;
 import Base.Vector2D;
-import Game.Cloud.CloudJump;
-import Game.Cloud.CloudSteady;
+import Game.Enemy.EnemyPlatformBullet;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
 import Physic.RunHitObj;
@@ -25,10 +24,9 @@ public class Player extends GameObject implements PhysicBody {
         this.boxCollider = new BoxCollider(16,16);
         this.attributes.add(new PlayerMove());
         this.attributes.add(new PlayerShoot());
-//        this.runHitObj = new RunHitObj(
-//                CloudJump.class,
-//                CloudSteady.class
-//        );
+        this.runHitObj = new RunHitObj(
+                EnemyPlatformBullet.class
+        );
     }
 
     @Override
@@ -46,7 +44,8 @@ public class Player extends GameObject implements PhysicBody {
 
     @Override
     public void getHit(GameObject gameObject) {
-            this.changeVelocity = true;
+            if(gameObject instanceof EnemyPlatformBullet)
+                this.isAlive = false;
     }
 
 }

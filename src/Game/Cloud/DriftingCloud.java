@@ -34,6 +34,13 @@ public class DriftingCloud extends GameObject implements PhysicBody {
             this.boxCollider = new BoxCollider(50,1);
             this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
         }
+        outSreen();
+    }
+
+    public void outSreen(){
+        if(this.position.y > 800){
+            this.isAlive = false;
+        }
     }
 
     @Override

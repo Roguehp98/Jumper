@@ -23,8 +23,17 @@ public class EnemyShoot implements GameObjectAttributes<EnemyPlatform> {
                     enemyPlatformBullet.velocity.set(
                             (new Vector2D(2.0f, 0.0f)).rotate(angle)
                     );
+                    outScreen(enemyPlatformBullet);
                     this.frameCounter.reset();
                 }
         }
+    }
+
+    public void outScreen(EnemyPlatformBullet enemyPlatformBullet){
+        if(enemyPlatformBullet.position.x < 0
+                || enemyPlatformBullet.position.x > 480
+                || enemyPlatformBullet.position.y < 0
+                || enemyPlatformBullet.position.y > 800)
+            enemyPlatformBullet.isAlive = false;
     }
 }
