@@ -34,6 +34,12 @@ public class EnemyPlatformBullet extends GameObject implements PhysicBody {
         this.boxCollider.position.set(this.position.x - 2.5f, this.position.y - 2.5f);
         this.position.addUp(this.velocity);
         this.runHitObj.run(this);
+        outSrceen();
+    }
+
+    public void outSrceen(){
+        if(this.position.x < 0 || this.position.x > 450 || this.position.y < 0 || this.position.y > 800)
+            this.isAlive = false;
     }
 
     @Override

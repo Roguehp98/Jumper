@@ -1,3 +1,4 @@
+import Base.GameObject;
 import Base.GameObjectManager;
 import Base.Vector2D;
 import Game.Background.Background;
@@ -17,14 +18,15 @@ public class GameCanvas extends JPanel {
     public GameCanvas(){
         this.setSize(600,800);
         setUpBackBuffered();
-        CreateCouldJump createCouldJump = GameObjectManager.instance.recycle(CreateCouldJump.class);
+        CreateCouldJump createCouldJump = new CreateCouldJump();
         createCouldJump.configAction();
-        CreateDriftingCloud createDriftingCloud = GameObjectManager.instance.recycle(CreateDriftingCloud.class);
+        GameObjectManager.instance.add(createCouldJump);
+        CreateDriftingCloud createDriftingCloud = new CreateDriftingCloud();
         createDriftingCloud.configAction();
+        GameObjectManager.instance.add(createDriftingCloud);
         GameObjectManager.instance.add(new Background());
         GameObjectManager.instance.add(new CloudSteady(300,600));
         GameObjectManager.instance.add(new EnemySin());
-
         this.setupPlayer();
         this.setVisible(true);
     }
@@ -45,6 +47,7 @@ public class GameCanvas extends JPanel {
     public void renderAll(){
         GameObjectManager.instance.renderAll(graphics);
         this.repaint();
+
     }
 
     public void runAll(){

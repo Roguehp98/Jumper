@@ -68,9 +68,9 @@ public class CreateCouldJump extends GameObject {
             this.loadLocationCloudBefore.set(cloudJump.position.copy());
         } else {
             randomLocaion();
-            cloudJump.position.x = this.loadLocationCloudBefore.x - location * random.nextInt(108) - location * 20;
+            cloudJump.position.x = this.loadLocationCloudBefore.x - location * random.nextInt(108) - location * 10;
             if (cloudJump.position.x < 70 || cloudJump.position.x > 350) {
-                cloudJump.position.x = this.loadLocationCloudBefore.x - (-1) * location * random.nextInt(108) + location*20;
+                cloudJump.position.x = this.loadLocationCloudBefore.x - (-1) * location * random.nextInt(108) + location*10;
             }
             cloudJump.position.y = this.loadLocationCloudBefore.y - 65 ;
             this.loadLocationCloudBefore.set(cloudJump.position.copy());
