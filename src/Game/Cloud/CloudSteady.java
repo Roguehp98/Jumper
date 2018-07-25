@@ -22,41 +22,46 @@ public class CloudSteady extends GameObject implements PhysicBody {
     public static Vector2D loadLocationCloudSteady;
     Random random = new Random();
 
-    public CloudSteady(int x, int y) {
+    public CloudSteady() {
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resource/cloud.png", 50, 20);
         this.loadLocationCloudSteady = new Vector2D();
-        this.position.set(x, y);
+//        this.position.set(x, y);
         this.boxCollider = new BoxCollider(50, 20);
     }
 
     public void run() {
-//        this.position.set(300,600);
+        this.position.set(200, 600);
         loadLocationCloudSteady.set(this.position.copy());
         Player player = GameObjectManager.instance.findObject(Player.class);
 //        this.boxCollider.position.set(this.position.x - 25,this.position.y -10);
-        if (player.velocity.y > 0) {
-            this.boxCollider = new BoxCollider(50, 1);
-            this.boxCollider.position.set(this.position.x - 25, this.position.y + 10);
-        } else {
-            this.boxCollider = new BoxCollider(50, 1);
-            this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
-        }
-        if (player.position.x != 300)
-            addAction(
-                    new SequenceAction(
-                            new WaitAction(100),
-                            new ActionAdapter() {
-                                @Override
-                                public boolean run(GameObject owner) {
-                                    CloudSteady cloudSteady = GameObjectManager.instance.findObject(CloudSteady.class);
-                                    cloudSteady.isAlive = false;
-                                    return true;
+        if (player != null)
+            if (player.velocity.y > 0) {
+                this.boxCollider = new BoxCollider(50, 1);
+                this.boxCollider.position.set(this.position.x - 25, this.position.y + 10);
+            } else {
+                this.boxCollider = new BoxCollider(50, 1);
+                this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
+            }
+        if (player.position.x != 200 && player.velocity.y > 5 && player.velocity.y < 6)
+            this.isAlive = false;
+        addAction(
+                new LimitAction(
+                        1,
+                        new SequenceAction(
+                                new WaitAction(1000),
+                                new ActionAdapter() {
+                                    @Override
+                                    public boolean run(GameObject owner) {
+                                        CloudSteady cloudSteady = GameObjectManager.instance.findObject(CloudSteady.class);
+                                        cloudSteady.isAlive = false;
+                                        return true;
+                                    }
                                 }
-                            }
-                    )
+                        )
+                )
+        );
 
-            );
     }
 
 

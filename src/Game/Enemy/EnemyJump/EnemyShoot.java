@@ -1,4 +1,4 @@
-package Game.Enemy;
+package Game.Enemy.EnemyJump;
 
 import Base.FrameCounter;
 import Base.GameObjectAttributes;

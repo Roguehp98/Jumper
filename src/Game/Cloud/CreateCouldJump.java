@@ -15,20 +15,21 @@ public class CreateCouldJump extends GameObject {
     int zoneCloud;
     int countCloud;
     int location;
-    Vector2D loadLocationCloudBefore;
+    public static Vector2D loadLocationCloudBefore;
 
 
     public CreateCouldJump() {
         this.frameCounter = new FrameCounter(40);
-        loadLocationCloudBefore = new Vector2D();
+        loadLocationCloudBefore = new Vector2D(-50,-20);
 
     }
 
     public void configAction() {
-
         this.addAction(
-                new RepeatActionForever(
+                new LimitAction(
+                        12,
                         new SequenceAction(
+                                new WaitAction(3),
                                 new ActionAdapter() {
                                     @Override
                                     public boolean run(GameObject owner) {
@@ -66,7 +67,8 @@ public class CreateCouldJump extends GameObject {
             // 108 : quang duong xa nhat player nhay duoc
             // 80 : do cao cao nhat player vuon toi
             this.loadLocationCloudBefore.set(cloudJump.position.copy());
-        } else {
+        }
+        if(countCloud > 1){
             randomLocaion();
             cloudJump.position.x = this.loadLocationCloudBefore.x - location * random.nextInt(108) - location * 10;
             if (cloudJump.position.x < 70 || cloudJump.position.x > 350) {

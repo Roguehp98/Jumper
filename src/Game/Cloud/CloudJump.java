@@ -16,6 +16,8 @@ public class CloudJump extends GameObject implements PhysicBody {
 
     public BoxCollider boxCollider;
     public Vector2D velocity;
+    int zoneCloud;
+    int location;
 
     Random random = new Random();
 
@@ -30,7 +32,7 @@ public class CloudJump extends GameObject implements PhysicBody {
         super.run();
         this.velocity.set(new Vector2D(0, 1));
         Player player = GameObjectManager.instance.findObject(Player.class);
-         if (player.isAlive)
+        if (player != null)
             if (player.velocity.y > 0) {
 //            this.boxCollider = new BoxCollider(50,1);
                 this.boxCollider.position.set(this.position.x - 25, this.position.y + 10);
@@ -38,17 +40,38 @@ public class CloudJump extends GameObject implements PhysicBody {
 //            this.boxCollider = new BoxCollider(50,1);
                 this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
             }
-//        this.boxCollider.position.set(this.position.x - 25,this.position.y  - 10);
         this.position.addUp(this.velocity);
-         this.outSreen();
+        this.outSreen();
 
     }
 
     public void outSreen() {
-        if (this.position.y > 800) {
-            this.isAlive = false;
+        if (this.position.y > 800 ) {
+            this.position.y = 0;
         }
     }
+
+    public void resetPositionX(){
+        this.zoneCloud = random.nextInt(2);
+        randomLocaion();
+        this.position.x = CreateCouldJump.loadLocationCloudBefore.x - location * random.nextInt(108) - location * 10;
+        if (this.position.x < 90 || this.position.x > 350) {
+            this.position.x = CreateCouldJump.loadLocationCloudBefore.x - (-1) * location * random.nextInt(108) + location*10;
+        }
+        CreateCouldJump.loadLocationCloudBefore.set(this.position.copy());
+    }
+
+    public void randomLocaion() {
+        switch (this.zoneCloud) {
+            case 0:
+                location = -1;
+                break;
+            case 1:
+                location = 1;
+                break;
+        }
+    }
+
     @Override
     public BoxCollider getBoxCollier() {
         return this.boxCollider;

@@ -1,11 +1,10 @@
-import Base.GameObject;
 import Base.GameObjectManager;
 import Base.Vector2D;
 import Game.Background.Background;
 import Game.Cloud.CloudSteady;
 import Game.Cloud.CreateCouldJump;
 import Game.Cloud.CreateDriftingCloud;
-import Game.Enemy.EnemySin;
+import Game.Enemy.EnemyFly.EnemySin;
 import Game.Player.Player;
 
 import javax.swing.*;
@@ -18,14 +17,12 @@ public class GameCanvas extends JPanel {
     public GameCanvas(){
         this.setSize(600,800);
         setUpBackBuffered();
-        CreateCouldJump createCouldJump = new CreateCouldJump();
+        CreateCouldJump createCouldJump = GameObjectManager.instance.recycle(CreateCouldJump.class);
         createCouldJump.configAction();
-        GameObjectManager.instance.add(createCouldJump);
-        CreateDriftingCloud createDriftingCloud = new CreateDriftingCloud();
+        CreateDriftingCloud createDriftingCloud = GameObjectManager.instance.recycle(CreateDriftingCloud.class);
         createDriftingCloud.configAction();
-        GameObjectManager.instance.add(createDriftingCloud);
         GameObjectManager.instance.add(new Background());
-        GameObjectManager.instance.add(new CloudSteady(300,600));
+        GameObjectManager.instance.add(new CloudSteady());
         GameObjectManager.instance.add(new EnemySin());
         this.setupPlayer();
         this.setVisible(true);
@@ -33,7 +30,7 @@ public class GameCanvas extends JPanel {
 
     public void setupPlayer(){
         Player player = new Player();
-        player.position.set(new Vector2D(300,450));
+        player.position.set(new Vector2D(200,450));
         GameObjectManager.instance.add(player);
     }
 

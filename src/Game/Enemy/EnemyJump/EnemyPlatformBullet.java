@@ -1,4 +1,4 @@
-package Game.Enemy;
+package Game.Enemy.EnemyJump;
 
 import Base.GameObject;
 import Base.Vector2D;

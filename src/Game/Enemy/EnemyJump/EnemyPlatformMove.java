@@ -1,4 +1,4 @@
-package Game.Enemy;
+package Game.Enemy.EnemyJump;
 
 import Base.GameObjectAttributes;
 import Base.GameObjectManager;
@@ -21,11 +21,6 @@ public class EnemyPlatformMove implements GameObjectAttributes<EnemyPlatform> {
         this.velocity -= gravity;
         enemyPlatform.velocity.set(0,this.velocity);
         enemyPlatform.position.subtractBy(enemyPlatform.velocity);
-        outSreen(enemyPlatform);
     }
 
-    public void outSreen(EnemyPlatform enemyPlatform){
-        if(enemyPlatform.position.y > 800)
-            enemyPlatform.isAlive = false;
-    }
 }

@@ -20,13 +20,8 @@ public class PlayerShoot implements GameObjectAttributes<Player> {
                     PlayerBullet playerBullet = GameObjectManager.instance.recycle(PlayerBullet.class);
                     playerBullet.position.set(player.position);
                     playerBullet.velocity.set(new Vector2D(-player.velocity.x, 0).multiply(2f));
-                    outScreen(playerBullet);
                     this.frameCounter.reset();
                 }
         }
-    }
-    public void outScreen(PlayerBullet playerBullet){
-        if(playerBullet.position.x < 0|| playerBullet.position.x > 480)
-            playerBullet.isAlive = false;
     }
 }

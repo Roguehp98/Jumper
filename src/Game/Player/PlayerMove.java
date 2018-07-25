@@ -18,6 +18,7 @@ public class PlayerMove implements GameObjectAttributes<Player> {
     float gravity = 0.3f;
 
 
+
     public PlayerMove() {
 
     }

@@ -74,25 +74,25 @@ public class GameObjectManager {
     }
 
     public <T extends GameObject> T recycle(Class<T> cls) {
-        T object = (T)this.list
+        T gameObject = (T) this.list
                 .stream()
-                .filter(gameObject -> !gameObject.isAlive)
-                .filter(gameObject -> cls.isInstance(gameObject))
+                .filter(object -> cls.isInstance(object))
+                .filter(object -> !object.isAlive)
                 .findFirst()
                 .orElse(null);
-        if(object != null){
-            object.isAlive = true;
-        }
-        else{
+        if (gameObject != null) {
+            gameObject.isAlive = true;
+            return gameObject;
+        } else {
             try {
-                object = cls.newInstance(); // tao moi 1 doi tuong
-                this.add(object);
+                gameObject = cls.newInstance();
+                this.add(gameObject);
+                return gameObject;
             } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
+                return null;
             }
         }
-        return object;
-//        cls.newInstance();
     }
 
 

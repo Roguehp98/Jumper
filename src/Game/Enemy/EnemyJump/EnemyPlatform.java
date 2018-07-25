@@ -1,9 +1,7 @@
-package Game.Enemy;
+package Game.Enemy.EnemyJump;
 
 import Base.GameObject;
-import Base.GameObjectManager;
 import Base.Vector2D;
-import Game.Cloud.DriftingCloud;
 import Game.Player.PlayerBullet;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
@@ -28,8 +26,13 @@ public class EnemyPlatform extends GameObject implements PhysicBody {
         super.run();
         this.boxCollider.position.set(this.position.x - 15,this.position.y - 15);
         this.runHitObj.run(this);
+        outSrceen();
     }
 
+    public void outSrceen(){
+        if(this.position.y > 800)
+            this.isAlive = false;
+    }
 
     @Override
     public BoxCollider getBoxCollier() {

@@ -2,7 +2,7 @@ package Game.Cloud;
 
 import Action.*;
 import Base.*;
-import Game.Enemy.EnemyPlatform;
+import Game.Enemy.EnemyJump.EnemyPlatform;
 
 import java.util.Random;
 
@@ -32,9 +32,6 @@ public class CreateDriftingCloud extends GameObject  {
                                         driftingCloud.velocity.set(0,1);
                                         EnemyPlatform enemyPlatform = GameObjectManager.instance.recycle(EnemyPlatform.class);
                                         enemyPlatform.position.set(driftingCloud.position.x,driftingCloud.position.y - 25);
-                                        if(!driftingCloud.isAlive){
-                                            enemyPlatform.isAlive = false;
-                                        }
                                         return true;
                                     }
                                 }
@@ -51,7 +48,7 @@ public class CreateDriftingCloud extends GameObject  {
         }
         if(this.zoneCloud == 0){
             a = random.nextInt(50);
-            driftingCloud.position.set(new Vector2D(400 + a,0));
+            driftingCloud.position.set(new Vector2D(350 + a,0));
         }
     }
 

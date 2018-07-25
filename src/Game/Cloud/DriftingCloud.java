@@ -16,29 +16,33 @@ public class DriftingCloud extends GameObject implements PhysicBody {
     public Vector2D velocity;
 
     Random random = new Random();
-    public DriftingCloud(){
+
+    public DriftingCloud() {
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/cloud.png",50,20);
-        this.boxCollider = new BoxCollider(50,20);
+        this.renderer = new ImageRenderer("resource/cloud.png", 50, 20);
+        this.boxCollider = new BoxCollider(50, 20);
 
     }
 
-    public void run(){
+    public void run() {
         super.run();
         this.position.addUp(this.velocity);
         Player player = GameObjectManager.instance.findObject(Player.class);
-        if(player.velocity.y > 0 ){
-            this.boxCollider = new BoxCollider(50,1);
-            this.boxCollider.position.set(this.position.x - 25,this.position.y + 10);
-        }else{
-            this.boxCollider = new BoxCollider(50,1);
-            this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
+        if (player != null) {
+            if (player.velocity.y > 0) {
+                this.boxCollider = new BoxCollider(50, 1);
+                this.boxCollider.position.set(this.position.x - 25, this.position.y + 10);
+            } else {
+                this.boxCollider = new BoxCollider(50, 1);
+                this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
+            }
         }
+        else this.boxCollider.position.set(this.position.x - 25,this.position.y  - 10);
         outSreen();
     }
 
-    public void outSreen(){
-        if(this.position.y > 800){
+    public void outSreen() {
+        if (this.position.y > 800) {
             this.isAlive = false;
         }
     }

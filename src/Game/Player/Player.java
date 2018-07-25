@@ -2,7 +2,8 @@ package Game.Player;
 
 import Base.GameObject;
 import Base.Vector2D;
-import Game.Enemy.EnemyPlatformBullet;
+import Game.Enemy.EnemyJump.EnemyPlatformBullet;
+import Game.Enemy.EnemyFly.EnemySin;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
 import Physic.RunHitObj;
@@ -25,7 +26,8 @@ public class Player extends GameObject implements PhysicBody {
         this.attributes.add(new PlayerMove());
         this.attributes.add(new PlayerShoot());
         this.runHitObj = new RunHitObj(
-                EnemyPlatformBullet.class
+                EnemyPlatformBullet.class,
+                EnemySin.class
         );
     }
 
@@ -45,6 +47,8 @@ public class Player extends GameObject implements PhysicBody {
     @Override
     public void getHit(GameObject gameObject) {
             if(gameObject instanceof EnemyPlatformBullet)
+                this.isAlive = false;
+            if(gameObject instanceof EnemySin)
                 this.isAlive = false;
     }
 
