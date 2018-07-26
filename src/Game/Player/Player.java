@@ -20,7 +20,7 @@ public class Player extends GameObject implements PhysicBody {
     private RunHitObj runHitObj;
 
     public Player(){
-        this.renderer = new ImageRenderer("resource/circle.png",16,16);
+        this.renderer = new ImageRenderer("resource/image/circle.png",16,16);
         this.velocity = new Vector2D();
         this.boxCollider = new BoxCollider(16,16);
         this.attributes.add(new PlayerMove());

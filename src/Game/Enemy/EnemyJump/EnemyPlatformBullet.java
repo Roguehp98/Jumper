@@ -18,7 +18,7 @@ public class EnemyPlatformBullet extends GameObject implements PhysicBody {
 
     public EnemyPlatformBullet(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/circle.png",5,5);
+        this.renderer = new ImageRenderer("resource/image/circle.png",5,5);
         this.boxCollider = new BoxCollider(5,5);
         this.runHitObj = new RunHitObj(
                 PlayerBullet.class,

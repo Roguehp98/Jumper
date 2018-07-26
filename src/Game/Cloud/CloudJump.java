@@ -23,7 +23,7 @@ public class CloudJump extends GameObject implements PhysicBody {
 
     public CloudJump() {
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/cloud.png", 50, 20);
+        this.renderer = new ImageRenderer("resource/image/cloud.png", 50, 20);
         this.boxCollider = new BoxCollider(50, 1);
 //        this.runHitObj = new RunHitObj(Player.class);
     }
@@ -48,6 +48,8 @@ public class CloudJump extends GameObject implements PhysicBody {
     public void outSreen() {
         if (this.position.y > 800 ) {
             this.position.y = 0;
+            this.resetPositionX();
+
         }
     }
 

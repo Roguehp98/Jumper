@@ -18,7 +18,7 @@ public class PlayerBullet extends GameObject implements PhysicBody {
 
     public PlayerBullet(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/circle.png",6,6);
+        this.renderer = new ImageRenderer("resource/image/circle.png",6,6);
         this.boxCollider = new BoxCollider(6,6);
         this.runHitObj = new RunHitObj(
                 CloudJump.class,

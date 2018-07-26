@@ -14,7 +14,7 @@ public class EnemyPlatform extends GameObject implements PhysicBody {
     BoxCollider boxCollider;
     public EnemyPlatform(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/star.png",30,30);
+        this.renderer = new ImageRenderer("resource/image/star.png",30,30);
         this.boxCollider = new BoxCollider(30,30);
         this.attributes.add(new EnemyPlatformMove());
         this.attributes.add(new EnemyShoot());

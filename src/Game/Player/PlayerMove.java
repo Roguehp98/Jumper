@@ -7,7 +7,9 @@ import Game.Cloud.CloudSteady;
 import Game.Cloud.DriftingCloud;
 import Input.KeybroadInput;
 import Physic.RunHitObj;
+import Utils.Utils;
 
+import javax.sound.sampled.Clip;
 import java.awt.event.KeyListener;
 
 public class PlayerMove implements GameObjectAttributes<Player> {
@@ -16,11 +18,10 @@ public class PlayerMove implements GameObjectAttributes<Player> {
     float velocityX = 0;
     float velocityY = 1;
     float gravity = 0.3f;
-
+    private Clip clip;
 
 
     public PlayerMove() {
-
     }
 
     @Override
@@ -43,19 +44,23 @@ public class PlayerMove implements GameObjectAttributes<Player> {
     public void AxisY(Player player) {
         CloudSteady cloudSteady = GameObjectManager.instance.checkCollision(player.boxCollider,CloudSteady.class);
         CloudJump cloudJump = GameObjectManager.instance.checkCollision(player.boxCollider,CloudJump.class);
-
+        DriftingCloud driftingCloud = GameObjectManager.instance.checkCollision(player.boxCollider,DriftingCloud.class);
 
         if (this.velocityY <= 0) {
-            if (cloudJump != null || cloudSteady != null) {
+            if (cloudJump != null || cloudSteady != null || driftingCloud != null) {
                 this.velocityY = 7;/* */
                 this.velocityX = 0;
-//                System.out.println("up");
-//                Player.changeVelocity = false;
+                this.clip = Utils.loadAudio("resource/audio/jump.wav");
+                this.clip.loop(0);
+                this.clip.start();
             }
         }else{
 
-            if(cloudJump != null || cloudSteady != null){
+            if(cloudJump != null || cloudSteady != null || driftingCloud != null){
                 this.velocityY = 0;
+                this.clip = Utils.loadAudio("resource/audio/smb_bump.wav");
+                this.clip.loop(0);
+                this.clip.start();
 //                Player.changeVelocity = false;
             }
 

@@ -24,7 +24,7 @@ public class CloudSteady extends GameObject implements PhysicBody {
 
     public CloudSteady() {
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/cloud.png", 50, 20);
+        this.renderer = new ImageRenderer("resource/image/cloud.png", 50, 20);
         this.loadLocationCloudSteady = new Vector2D();
 //        this.position.set(x, y);
         this.boxCollider = new BoxCollider(50, 20);
@@ -43,8 +43,9 @@ public class CloudSteady extends GameObject implements PhysicBody {
                 this.boxCollider = new BoxCollider(50, 1);
                 this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
             }
-        if (player.position.x != 200 && player.velocity.y > 5 && player.velocity.y < 6)
-            this.isAlive = false;
+        if (player != null)
+            if (player.position.x != 200 && player.velocity.y > 5 && player.velocity.y < 6)
+                this.isAlive = false;
         addAction(
                 new LimitAction(
                         1,

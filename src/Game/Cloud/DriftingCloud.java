@@ -6,6 +6,7 @@ import Base.Vector2D;
 import Game.Player.Player;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
+import Physic.RunHitObj;
 import Renderer.ImageRenderer;
 
 import java.util.Random;
@@ -19,9 +20,8 @@ public class DriftingCloud extends GameObject implements PhysicBody {
 
     public DriftingCloud() {
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/cloud.png", 50, 20);
-        this.boxCollider = new BoxCollider(50, 20);
-
+        this.renderer = new ImageRenderer("resource/image/cloud.png", 50, 20);
+        this.boxCollider = new BoxCollider(50, 1);
     }
 
     public void run() {
@@ -30,10 +30,9 @@ public class DriftingCloud extends GameObject implements PhysicBody {
         Player player = GameObjectManager.instance.findObject(Player.class);
         if (player != null) {
             if (player.velocity.y > 0) {
-                this.boxCollider = new BoxCollider(50, 1);
+//                this.boxCollider = new BoxCollider(50, 1);
                 this.boxCollider.position.set(this.position.x - 25, this.position.y + 10);
             } else {
-                this.boxCollider = new BoxCollider(50, 1);
                 this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
             }
         }
