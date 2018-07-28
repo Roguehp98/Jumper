@@ -10,15 +10,20 @@ import Physic.RunHitObj;
 import Renderer.ImageRenderer;
 import Scene.GameStartScene;
 import Scene.SceneManager;
+import Utils.Utils;
+
+import javax.sound.sampled.Clip;
 
 public class EnemyPlatform extends GameObject implements PhysicBody {
     Vector2D velocity;
     private RunHitObj runHitObj;
     BoxCollider boxCollider;
+    Clip clip;
     public EnemyPlatform(){
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resource/image/Character/EnemyJump.png",30,30);
         this.boxCollider = new BoxCollider(30,30);
+        this.clip = Utils.loadAudio("resource/audio/EnemyDie.wav");
         this.attributes.add(new EnemyPlatformMove());
         this.attributes.add(new EnemyShoot());
         this.runHitObj = new RunHitObj(PlayerBullet.class,
@@ -51,8 +56,11 @@ public class EnemyPlatform extends GameObject implements PhysicBody {
 
     @Override
     public void getHit(GameObject gameObject) {
-        if(gameObject instanceof PlayerBullet)
+        if(gameObject instanceof PlayerBullet ) {
             this.isAlive = false;
+            this.clip.loop(1);
+            this.clip.start();
+        }
         if(gameObject instanceof Player)
             this.isAlive = false;
     }

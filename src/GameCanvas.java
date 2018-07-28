@@ -1,5 +1,6 @@
 import Base.GameObjectManager;
 import Input.KeybroadInput;
+import Scene.GameOverScene;
 import Scene.GamePlayScene;
 import Scene.GameStartScene;
 import Scene.SceneManager;
@@ -34,6 +35,10 @@ public class GameCanvas extends JPanel {
     public void runAll() {
         GameObjectManager.instance.runAll();
         if (SceneManager.instance.getCurrentScene() instanceof GameStartScene)
+            if (KeybroadInput.instance.isEnter) {
+                SceneManager.instance.changeScene(new GamePlayScene());
+            }
+        if (SceneManager.instance.getCurrentScene() instanceof GameOverScene)
             if (KeybroadInput.instance.isEnter) {
                 SceneManager.instance.changeScene(new GamePlayScene());
             }

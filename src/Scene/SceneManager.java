@@ -29,4 +29,8 @@ public class SceneManager {
     public Scene getCurrentScene(){
         return this.currentScene;
     }
+
+    public Scene getNextScene(){
+        return this.nextScene;
+    }
 }

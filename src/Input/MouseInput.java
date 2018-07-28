@@ -13,10 +13,10 @@ public class MouseInput implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println(e.getX() + ", " + e.getY());
-//        if (SceneManager.instance.getCurrentScene() instanceof GameStartScene)
-//            if (e.getX() > 155 && e.getX() < 250 && e.getY() > 273 && e.getY() < 377) {
-//                SceneManager.instance.changeScene(new GamePlayScene());
-//            }
+        if (SceneManager.instance.getCurrentScene() instanceof GameStartScene)
+            if (e.getX() > 155 && e.getX() < 250 && e.getY() > 273 && e.getY() < 377) {
+                SceneManager.instance.changeScene(new GamePlayScene());
+            }
     }
 
     @Override

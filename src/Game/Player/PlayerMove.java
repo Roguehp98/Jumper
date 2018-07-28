@@ -6,6 +6,7 @@ import Game.Cloud.CloudJump;
 import Game.Cloud.CloudSteadyStart;
 import Game.Cloud.CloudSteadyinGamePlay;
 import Game.Cloud.DriftingCloud;
+import Highscore.Score;
 import Input.KeybroadInput;
 import Utils.Utils;
 
@@ -52,6 +53,12 @@ public class PlayerMove implements GameObjectAttributes<Player> {
                 this.clip = Utils.loadAudio("resource/audio/jump.wav");
                 this.clip.loop(0);
                 this.clip.start();
+                if(cloudJump != null) {
+                    if(CloudJump.checkScore == true) {
+                        Score.score += 20;
+                        CloudJump.checkScore = false;
+                    }
+                }
             }
         }else{
             if(cloudJump != null || cloudSteadyinGamePlay != null || driftingCloud != null){

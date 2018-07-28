@@ -21,8 +21,8 @@ public class CloudJump extends GameObject implements PhysicBody {
     int location;
     private RunHitObj runHitObj;
     Random random = new Random();
-    boolean checkScore = true;
 
+    public static boolean checkScore = true;
     public CloudJump() {
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resource/image/cloud.png", 50, 20);
@@ -52,7 +52,7 @@ public class CloudJump extends GameObject implements PhysicBody {
         if (this.position.y > 800) {
             this.position.y = 0;
             this.resetPositionX();
-
+            checkScore = true;
         }
     }
 
