@@ -4,6 +4,9 @@ import Base.FrameCounter;
 import Base.GameObjectAttributes;
 import Base.GameObjectManager;
 import Base.Vector2D;
+import Scene.GamePlayScene;
+import Scene.GameStartScene;
+import Scene.SceneManager;
 
 
 public class EnemyShoot implements GameObjectAttributes<EnemyPlatform> {
@@ -15,16 +18,17 @@ public class EnemyShoot implements GameObjectAttributes<EnemyPlatform> {
 
     @Override
     public void run(EnemyPlatform gameObject) {
-        if (this.frameCounter.run()) {
-            if (gameObject.isAlive)
-                for (double angle = 0.0; angle >= -180.0; angle -= 360.0 / 12.0) {
-                    EnemyPlatformBullet enemyPlatformBullet = GameObjectManager.instance.recycle(EnemyPlatformBullet.class);
-                    enemyPlatformBullet.position.set(gameObject.position);
-                    enemyPlatformBullet.velocity.set(
-                            (new Vector2D(2.0f, 0.0f)).rotate(angle)
-                    );
-                    this.frameCounter.reset();
-                }
-        }
+        if (SceneManager.instance.getCurrentScene() instanceof GamePlayScene)
+            if (this.frameCounter.run()) {
+                if (gameObject.isAlive)
+                    for (double angle = 0.0; angle >= -180.0; angle -= 360.0 / 12.0) {
+                        EnemyPlatformBullet enemyPlatformBullet = GameObjectManager.instance.recycle(EnemyPlatformBullet.class);
+                        enemyPlatformBullet.position.set(gameObject.position);
+                        enemyPlatformBullet.velocity.set(
+                                (new Vector2D(2.0f, 0.0f)).rotate(angle)
+                        );
+                        this.frameCounter.reset();
+                    }
+            }
     }
 }

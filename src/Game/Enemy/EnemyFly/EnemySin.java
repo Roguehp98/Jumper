@@ -3,11 +3,14 @@ package Game.Enemy.EnemyFly;
 import Base.GameObject;
 import Base.GameObjectManager;
 import Base.Vector2D;
+import Game.Enemy.EnemyJump.EnemyShoot;
 import Game.Player.Player;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
 import Physic.RunHitObj;
 import Renderer.ImageRenderer;
+import Scene.GameStartScene;
+import Scene.SceneManager;
 
 public class EnemySin extends GameObject implements PhysicBody {
     Vector2D velocity;
@@ -16,41 +19,41 @@ public class EnemySin extends GameObject implements PhysicBody {
     double angle;
     BoxCollider boxCollider;
     RunHitObj runHitObj;
-    float distanceBetweenPlayerAndEnemySin;
+    public static float distanceBetweenPlayerAndEnemySin;
+    int facing = 1;
 
-    public EnemySin() {
+    public EnemySin(int x, int y) {
         this.velocity = new Vector2D(-1, 0);
-        this.renderer = new ImageRenderer("resource/image/star.png", 30, 30);
-        this.position.set(0, 200);
+        this.renderer = new ImageRenderer("resource/image/Character/EnemyFly.png", 30, 30);
+        this.position.set(x, y);
         this.boxCollider = new BoxCollider(30, 30);
-        this.attributes.add(new EnemyThrow());
+        this.attributes.add(new EnemySinShoot());
         this.runHitObj = new RunHitObj(Player.class);
     }
 
     @Override
     public void run() {
         super.run();
+        Player player = GameObjectManager.instance.findObject(Player.class);
+        if (player != null)
+            this.distanceBetweenPlayerAndEnemySin = this.position.copy().subtractBy(player.position).length();
         if (this.position.x < 0 || this.position.x > 600) {
+            if(this.position.x > 600)
+                this.facing = -1;
+            if(this.position.x < 0)
+                this.facing = 1;
             this.velocity.x = -this.velocity.x;
+
         }
+        flippingImage();
         angle = 15 * count;
         double radians = Math.toRadians(angle);
         this.velocity.y = 2 * (float) (Math.sin(radians));
-        this.boxCollider.position.set(this.position.x - 15, this.position.y - 15);
+        this.boxCollider.position.set(this.position.x -15,this.position.y -15);
         this.position.subtractBy(this.velocity);
-
-//        Player player = GameObjectManager.instance.findObject(Player.class);
-//        if (player != null)
-//            this.distanceBetweenPlayerAndEnemySin = this.position.copy().subtractBy(player.position).length();
-//        if ((int) this.distanceBetweenPlayerAndEnemySin < 26){
-//            this.attributes.add(new EnemyRage());
-//            this.attributes.remove(new EnemyThrow());
-//        }else this.attributes.add(new EnemyThrow());
-
         this.runHitObj.run(this);
         reset();
-
-    }
+}
 
     public void reset() {
         if (count == 5)
@@ -63,6 +66,17 @@ public class EnemySin extends GameObject implements PhysicBody {
                 break;
             case 1:
                 count += 1;
+                break;
+        }
+    }
+
+    public void flippingImage(){
+        switch (facing){
+            case 1:
+                this.renderer = new ImageRenderer("resource/image/Character/EnemyFly.png", 30, 30);
+                break;
+            case -1:
+                this.renderer = new ImageRenderer("resource/image/Character/EnemyFlyFlipping.png", 30, 30);
                 break;
         }
     }

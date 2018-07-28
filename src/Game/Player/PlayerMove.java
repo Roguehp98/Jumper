@@ -3,14 +3,13 @@ package Game.Player;
 import Base.GameObjectAttributes;
 import Base.GameObjectManager;
 import Game.Cloud.CloudJump;
-import Game.Cloud.CloudSteady;
+import Game.Cloud.CloudSteadyStart;
+import Game.Cloud.CloudSteadyinGamePlay;
 import Game.Cloud.DriftingCloud;
 import Input.KeybroadInput;
-import Physic.RunHitObj;
 import Utils.Utils;
 
 import javax.sound.sampled.Clip;
-import java.awt.event.KeyListener;
 
 public class PlayerMove implements GameObjectAttributes<Player> {
 
@@ -42,12 +41,12 @@ public class PlayerMove implements GameObjectAttributes<Player> {
     }
 
     public void AxisY(Player player) {
-        CloudSteady cloudSteady = GameObjectManager.instance.checkCollision(player.boxCollider,CloudSteady.class);
+        CloudSteadyinGamePlay cloudSteadyinGamePlay = GameObjectManager.instance.checkCollision(player.boxCollider,CloudSteadyinGamePlay.class);
         CloudJump cloudJump = GameObjectManager.instance.checkCollision(player.boxCollider,CloudJump.class);
         DriftingCloud driftingCloud = GameObjectManager.instance.checkCollision(player.boxCollider,DriftingCloud.class);
-
+        CloudSteadyStart cloudSteadyStart = GameObjectManager.instance.checkCollision(player.boxCollider,CloudSteadyStart.class);
         if (this.velocityY <= 0) {
-            if (cloudJump != null || cloudSteady != null || driftingCloud != null) {
+            if (cloudJump != null || cloudSteadyinGamePlay != null || driftingCloud != null || cloudSteadyStart != null) {
                 this.velocityY = 7;/* */
                 this.velocityX = 0;
                 this.clip = Utils.loadAudio("resource/audio/jump.wav");
@@ -55,20 +54,15 @@ public class PlayerMove implements GameObjectAttributes<Player> {
                 this.clip.start();
             }
         }else{
-
-            if(cloudJump != null || cloudSteady != null || driftingCloud != null){
+            if(cloudJump != null || cloudSteadyinGamePlay != null || driftingCloud != null){
                 this.velocityY = 0;
                 this.clip = Utils.loadAudio("resource/audio/smb_bump.wav");
                 this.clip.loop(0);
                 this.clip.start();
-//                Player.changeVelocity = false;
             }
 
         }
         this.velocityY -= gravity;
-
-
-
     }
 
 

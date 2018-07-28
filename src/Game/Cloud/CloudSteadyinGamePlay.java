@@ -7,22 +7,23 @@ import Base.Vector2D;
 import Game.Player.Player;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
-import Physic.RunHitObj;
 import Renderer.ImageRenderer;
 
 import java.util.Random;
 
-public class CloudSteady extends GameObject implements PhysicBody {
+public class CloudSteadyinGamePlay extends GameObject implements PhysicBody {
 
     public Vector2D velocity;
 
     public BoxCollider boxCollider;
+    int x;
+    int y;
 
 
     public static Vector2D loadLocationCloudSteady;
     Random random = new Random();
 
-    public CloudSteady() {
+    public CloudSteadyinGamePlay() {
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resource/image/cloud.png", 50, 20);
         this.loadLocationCloudSteady = new Vector2D();
@@ -54,8 +55,8 @@ public class CloudSteady extends GameObject implements PhysicBody {
                                 new ActionAdapter() {
                                     @Override
                                     public boolean run(GameObject owner) {
-                                        CloudSteady cloudSteady = GameObjectManager.instance.findObject(CloudSteady.class);
-                                        cloudSteady.isAlive = false;
+                                        CloudSteadyinGamePlay cloudSteadyinGamePlay = GameObjectManager.instance.findObject(CloudSteadyinGamePlay.class);
+                                        cloudSteadyinGamePlay.isAlive = false;
                                         return true;
                                     }
                                 }

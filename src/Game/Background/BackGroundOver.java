@@ -3,12 +3,11 @@ package Game.Background;
 import Base.GameObject;
 import Renderer.BackgroundRenderer;
 
-
 import java.awt.*;
 
-public class Background extends GameObject {
+public class BackGroundOver extends GameObject {
 
-    public Background(){
+    public BackGroundOver(){
         this.renderer = new BackgroundRenderer(
                 0,
                 0,
@@ -16,10 +15,5 @@ public class Background extends GameObject {
                 800,
                 Color.BLUE
         );
-    }
-
-    @Override
-    public void render(Graphics graphics) {
-        super.render(graphics);
     }
 }

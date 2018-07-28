@@ -9,6 +9,7 @@ public class KeybroadInput implements KeyListener {
     public boolean isRight = false;
     public boolean isLeft = false;
     public boolean isSpace = false;
+    public boolean isEnter = false;
     public int countTime = 5;
 
     private KeybroadInput() {
@@ -36,6 +37,9 @@ public class KeybroadInput implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             this.isSpace = true;
         }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.isEnter = true;
+        }
     }
 
     @Override
@@ -48,6 +52,9 @@ public class KeybroadInput implements KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             this.isSpace = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.isEnter = false;
         }
     }
 }

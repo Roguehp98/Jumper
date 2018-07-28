@@ -1,6 +1,8 @@
 import Input.KeybroadInput;
+import Input.MouseInput;
 
 import javax.swing.*;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -17,8 +19,13 @@ public class GameWindow extends JFrame {
     }
 
     private void event(){
+        mouseEvent();
         keyboardEvent();
         windowEvent();
+    }
+
+    private void mouseEvent(){
+        this.addMouseListener(new MouseInput());
     }
 
     private void keyboardEvent() {

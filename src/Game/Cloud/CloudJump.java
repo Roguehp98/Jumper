@@ -3,6 +3,7 @@ package Game.Cloud;
 import Base.GameObject;
 import Base.GameObjectManager;
 import Base.Vector2D;
+import Game.Enemy.EnemyJump.EnemyPlatformBullet;
 import Game.Player.Player;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
@@ -18,14 +19,15 @@ public class CloudJump extends GameObject implements PhysicBody {
     public Vector2D velocity;
     int zoneCloud;
     int location;
-
+    private RunHitObj runHitObj;
     Random random = new Random();
+    boolean checkScore = true;
 
     public CloudJump() {
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resource/image/cloud.png", 50, 20);
         this.boxCollider = new BoxCollider(50, 1);
-//        this.runHitObj = new RunHitObj(Player.class);
+        this.runHitObj = new RunHitObj(EnemyPlatformBullet.class);
     }
 
     public void run() {
@@ -40,25 +42,26 @@ public class CloudJump extends GameObject implements PhysicBody {
 //            this.boxCollider = new BoxCollider(50,1);
                 this.boxCollider.position.set(this.position.x - 25, this.position.y - 10);
             }
+        this.runHitObj.run(this);
         this.position.addUp(this.velocity);
         this.outSreen();
 
     }
 
     public void outSreen() {
-        if (this.position.y > 800 ) {
+        if (this.position.y > 800) {
             this.position.y = 0;
             this.resetPositionX();
 
         }
     }
 
-    public void resetPositionX(){
+    public void resetPositionX() {
         this.zoneCloud = random.nextInt(2);
         randomLocaion();
         this.position.x = CreateCouldJump.loadLocationCloudBefore.x - location * random.nextInt(108) - location * 10;
         if (this.position.x < 90 || this.position.x > 350) {
-            this.position.x = CreateCouldJump.loadLocationCloudBefore.x - (-1) * location * random.nextInt(108) + location*10;
+            this.position.x = CreateCouldJump.loadLocationCloudBefore.x - (-1) * location * random.nextInt(108) + location * 10;
         }
         CreateCouldJump.loadLocationCloudBefore.set(this.position.copy());
     }

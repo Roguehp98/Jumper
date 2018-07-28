@@ -1,8 +1,6 @@
 package Base;
 
 import Game.Cloud.CloudJump;
-import Game.Cloud.CloudSteady;
-import Game.Player.Player;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
 
@@ -95,7 +93,10 @@ public class GameObjectManager {
         }
     }
 
-
+    public void clear(){
+        this.list.clear();
+        this.tempList.clear();
+    }
 
 
 

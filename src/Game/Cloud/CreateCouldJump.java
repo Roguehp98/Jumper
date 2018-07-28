@@ -20,7 +20,7 @@ public class CreateCouldJump extends GameObject {
 
     public CreateCouldJump() {
         this.frameCounter = new FrameCounter(40);
-        loadLocationCloudBefore = new Vector2D(-50,-20);
+        loadLocationCloudBefore = new Vector2D(0,0);
 
     }
 
@@ -61,7 +61,7 @@ public class CreateCouldJump extends GameObject {
         if (countCloud == 1) {
             randomLocaion();
 
-            cloudJump.position.x = CloudSteady.loadLocationCloudSteady.x - location * random.nextInt(108);
+            cloudJump.position.x = CloudSteadyinGamePlay.loadLocationCloudSteady.x - location * random.nextInt(108);
 
             cloudJump.position.y = 0;
             // 108 : quang duong xa nhat player nhay duoc

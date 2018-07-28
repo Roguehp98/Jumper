@@ -1,11 +1,8 @@
 import Base.GameObjectManager;
-import Base.Vector2D;
-import Game.Background.Background;
-import Game.Cloud.CloudSteady;
-import Game.Cloud.CreateCouldJump;
-import Game.Cloud.CreateDriftingCloud;
-import Game.Enemy.EnemyFly.EnemySin;
-import Game.Player.Player;
+import Input.KeybroadInput;
+import Scene.GamePlayScene;
+import Scene.GameStartScene;
+import Scene.SceneManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,44 +11,37 @@ import java.awt.image.BufferedImage;
 public class GameCanvas extends JPanel {
     Graphics graphics;
     BufferedImage backBuffered;
-    public GameCanvas(){
-        this.setSize(600,800);
+
+    public GameCanvas() {
+        this.setSize(600, 800);
         setUpBackBuffered();
-        CreateCouldJump createCouldJump = GameObjectManager.instance.recycle(CreateCouldJump.class);
-        createCouldJump.configAction();
-        CreateDriftingCloud createDriftingCloud = GameObjectManager.instance.recycle(CreateDriftingCloud.class);
-        createDriftingCloud.configAction();
-        GameObjectManager.instance.add(new Background());
-        GameObjectManager.instance.add(new CloudSteady());
-        GameObjectManager.instance.add(new EnemySin());
-        this.setupPlayer();
         this.setVisible(true);
+        SceneManager.instance.changeScene(new GameStartScene());
     }
-
-    public void setupPlayer(){
-        Player player = new Player();
-        player.position.set(new Vector2D(200,450));
-        GameObjectManager.instance.add(player);
-    }
-
 
 
     @Override
     protected void paintComponent(Graphics g) {
-        g.drawImage(this.backBuffered,0,0,null);
+        g.drawImage(this.backBuffered, 0, 0, null);
     }
 
-    public void renderAll(){
+    public void renderAll() {
         GameObjectManager.instance.renderAll(graphics);
         this.repaint();
 
     }
 
-    public void runAll(){
+    public void runAll() {
         GameObjectManager.instance.runAll();
+        if (SceneManager.instance.getCurrentScene() instanceof GameStartScene)
+            if (KeybroadInput.instance.isEnter) {
+                SceneManager.instance.changeScene(new GamePlayScene());
+            }
+        SceneManager.instance.performChangeSceneIfNeeded();
     }
-    public void setUpBackBuffered(){
-        backBuffered = new BufferedImage(450,800,BufferedImage.TYPE_4BYTE_ABGR);
+
+    public void setUpBackBuffered() {
+        backBuffered = new BufferedImage(450, 800, BufferedImage.TYPE_4BYTE_ABGR);
         this.graphics = this.backBuffered.getGraphics();
     }
 

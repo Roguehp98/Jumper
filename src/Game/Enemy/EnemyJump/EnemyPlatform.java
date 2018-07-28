@@ -2,11 +2,14 @@ package Game.Enemy.EnemyJump;
 
 import Base.GameObject;
 import Base.Vector2D;
+import Game.Player.Player;
 import Game.Player.PlayerBullet;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
 import Physic.RunHitObj;
 import Renderer.ImageRenderer;
+import Scene.GameStartScene;
+import Scene.SceneManager;
 
 public class EnemyPlatform extends GameObject implements PhysicBody {
     Vector2D velocity;
@@ -14,17 +17,24 @@ public class EnemyPlatform extends GameObject implements PhysicBody {
     BoxCollider boxCollider;
     public EnemyPlatform(){
         this.velocity = new Vector2D();
-        this.renderer = new ImageRenderer("resource/image/star.png",30,30);
+        this.renderer = new ImageRenderer("resource/image/Character/EnemyJump.png",30,30);
         this.boxCollider = new BoxCollider(30,30);
         this.attributes.add(new EnemyPlatformMove());
         this.attributes.add(new EnemyShoot());
-        this.runHitObj = new RunHitObj(PlayerBullet.class);
+        this.runHitObj = new RunHitObj(PlayerBullet.class,
+                Player.class);
     }
 
     @Override
     public void run() {
         super.run();
-        this.boxCollider.position.set(this.position.x - 15,this.position.y - 15);
+        if(SceneManager.instance.getCurrentScene() instanceof GameStartScene) {
+            this.renderer = new ImageRenderer("resource/image/Character/EnemyJump.png", 60, 60);
+            this.boxCollider = new BoxCollider(60, 60);
+            this.boxCollider.position.set(this.position.x - 30, this.position.y - 30);
+        }else {
+            this.boxCollider.position.set(this.position.x - 15, this.position.y - 15);
+        }
         this.runHitObj.run(this);
         outSrceen();
     }
@@ -42,6 +52,8 @@ public class EnemyPlatform extends GameObject implements PhysicBody {
     @Override
     public void getHit(GameObject gameObject) {
         if(gameObject instanceof PlayerBullet)
+            this.isAlive = false;
+        if(gameObject instanceof Player)
             this.isAlive = false;
     }
 }
