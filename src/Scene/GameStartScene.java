@@ -2,6 +2,7 @@ package Scene;
 
 import Base.GameObjectManager;
 import Base.Vector2D;
+import Game.Background.BackGroundStart;
 import Game.Background.Background;
 import Game.Background.ButtonStart;
 import Game.Background.DrawTextStart;
@@ -15,19 +16,9 @@ public class GameStartScene implements Scene {
 
     @Override
     public void init() {
-        GameObjectManager.instance.recycle(Background.class);
-        ButtonStart buttonStart = GameObjectManager.instance.recycle(ButtonStart.class);
-        buttonStart.position.set(200,300);
-        DrawTextStart drawTextStart = GameObjectManager.instance.recycle(DrawTextStart.class);
-        drawTextStart.position.set(200,200);
-        CloudSteadyStart cloudSteadyStart1 = new CloudSteadyStart(350,600);
-        GameObjectManager.instance.add(cloudSteadyStart1);
-        EnemyPlatform enemyPlatform = GameObjectManager.instance.recycle(EnemyPlatform.class);
-        enemyPlatform.position.set(100,500);
-        CloudSteadyStart cloudSteadyStart2 = new CloudSteadyStart(100,600);
-        GameObjectManager.instance.add(cloudSteadyStart2);
-        setupPlayer();
-        GameObjectManager.instance.add(new EnemySin(0,100));
+
+        BackGroundStart backGroundStart = GameObjectManager.instance.recycle(BackGroundStart.class);
+        GameObjectManager.instance.add(new EnemySin(0,400));
     }
 
     public void setupPlayer() {

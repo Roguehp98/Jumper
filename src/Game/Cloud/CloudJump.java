@@ -5,6 +5,7 @@ import Base.GameObjectManager;
 import Base.Vector2D;
 import Game.Enemy.EnemyJump.EnemyPlatformBullet;
 import Game.Player.Player;
+import Highscore.Score;
 import Physic.BoxCollider;
 import Physic.PhysicBody;
 import Physic.RunHitObj;
@@ -22,17 +23,22 @@ public class CloudJump extends GameObject implements PhysicBody {
     private RunHitObj runHitObj;
     Random random = new Random();
 
-    public static boolean checkScore = true;
+    public boolean checkScore;
+
     public CloudJump() {
         this.velocity = new Vector2D();
         this.renderer = new ImageRenderer("resource/image/cloud.png", 50, 20);
         this.boxCollider = new BoxCollider(50, 1);
         this.runHitObj = new RunHitObj(EnemyPlatformBullet.class);
+        this.checkScore = true;
     }
 
     public void run() {
         super.run();
-        this.velocity.set(new Vector2D(0, 1));
+        if (Score.score < 1000)
+            this.velocity.set(new Vector2D(0, 1));
+        if (Score.score >= 1000)
+            this.velocity.set(new Vector2D(0, 2));
         Player player = GameObjectManager.instance.findObject(Player.class);
         if (player != null)
             if (player.velocity.y > 0) {

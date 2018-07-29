@@ -54,9 +54,9 @@ public class PlayerMove implements GameObjectAttributes<Player> {
                 this.clip.loop(0);
                 this.clip.start();
                 if(cloudJump != null) {
-                    if(CloudJump.checkScore == true) {
+                    if(cloudJump.checkScore == true) {
                         Score.score += 20;
-                        CloudJump.checkScore = false;
+                        cloudJump.checkScore = false;
                     }
                 }
             }

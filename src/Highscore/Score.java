@@ -4,6 +4,7 @@ import Base.GameObject;
 import Renderer.TextRenderer;
 import Scene.GamePlayScene;
 import Scene.GameOverScene;
+import Scene.GameStartScene;
 import Scene.SceneManager;
 
 import java.awt.*;
@@ -21,7 +22,7 @@ public class Score extends GameObject {
     }
 
     public void run(){
-        if(SceneManager.instance.getNextScene() instanceof GamePlayScene && SceneManager.instance.getCurrentScene() instanceof GameOverScene){
+        if( SceneManager.instance.getCurrentScene() instanceof GameOverScene){
             score = 0;
         }
     }

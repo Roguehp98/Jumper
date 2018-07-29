@@ -32,7 +32,7 @@ public class CloudSteadyinGamePlay extends GameObject implements PhysicBody {
     }
 
     public void run() {
-        this.position.set(200, 600);
+        this.position.set(200, 400);
         loadLocationCloudSteady.set(this.position.copy());
         Player player = GameObjectManager.instance.findObject(Player.class);
 //        this.boxCollider.position.set(this.position.x - 25,this.position.y -10);

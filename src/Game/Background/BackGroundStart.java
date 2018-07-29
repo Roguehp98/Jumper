@@ -1,8 +1,6 @@
 package Game.Background;
 
 import Base.GameObject;
-import Base.Vector2D;
-import Renderer.BackgroundRenderer;
 import Renderer.ImageRenderer;
 
 import javax.imageio.ImageIO;
@@ -11,12 +9,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class BackGroundOver extends GameObject {
+public class BackGroundStart extends GameObject {
+    public BufferedImage image = this.loadImage("resource/image/Background/backgroundstart.png");
 
-    public BufferedImage image = this.loadImage("resource/image/Background/background.png");
-
-    public BackGroundOver() {
-        this.renderer = new ImageRenderer("resource/image/Background/background.png", 450, 800);
+    public BackGroundStart() {
+        this.renderer = new ImageRenderer("resource/image/Background/backgroundstart.png", 450, 800);
     }
 
     public void render(Graphics graphics) {

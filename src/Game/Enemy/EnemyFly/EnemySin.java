@@ -37,8 +37,8 @@ public class EnemySin extends GameObject implements PhysicBody {
         Player player = GameObjectManager.instance.findObject(Player.class);
         if (player != null)
             this.distanceBetweenPlayerAndEnemySin = this.position.copy().subtractBy(player.position).length();
-        if (this.position.x < 0 || this.position.x > 600) {
-            if(this.position.x > 600)
+        if (this.position.x < 0 || this.position.x > 450) {
+            if(this.position.x > 450)
                 this.facing = -1;
             if(this.position.x < 0)
                 this.facing = 1;
